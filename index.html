@@ -3,168 +3,139 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MBTI 테스트</title>
+    <title>아름다운 웹 페이지</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f0f8ff; /* 파스텔 톤 배경색 */
+            font-family: 'Arial', sans-serif;
             margin: 0;
             padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
+            background-color: #f7f9fc;
+            color: #333;
+            transition: background-color 0.3s ease;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #4a90e2, #50e3c2);
+            color: #fff;
+            padding: 40px 20px;
+            text-align: center;
+            position: relative;
+        }
+
+        .header::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 10px;
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin: 0;
         }
 
         .container {
-            background-color: #ffffff; /* 흰색 배경 */
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            max-width: 1200px;
+            margin: 20px auto;
             padding: 20px;
-            width: 300px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .section {
+            margin-bottom: 30px;
+        }
+
+        .section h2 {
+            font-size: 2em;
+            margin-bottom: 10px;
+            color: #4a90e2;
+        }
+
+        .section p {
+            line-height: 1.6;
+            font-size: 1.1em;
+        }
+
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 1em;
+            color: #fff;
+            background: #50e3c2;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
             text-align: center;
-        }
-
-        h1 {
-            color: #4a90e2; /* 파스텔 톤의 블루 */
-            margin-bottom: 20px;
-        }
-
-        .question {
-            margin: 15px 0;
-            cursor: pointer;
             transition: background-color 0.3s ease, transform 0.3s ease;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            padding: 10px;
-        }
-
-        .question:hover {
-            background-color: #e6f7ff; /* 호버 시 파스텔 블루 배경색 */
-            transform: scale(1.05); /* 호버 시 크기 증가 */
-        }
-
-        .question.active {
-            background-color: #d0e4f5; /* 선택 시 배경색 */
-        }
-
-        .answer {
-            display: none;
-            margin-top: 10px;
-        }
-
-        .answer button {
-            margin: 5px;
-            padding: 10px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            background-color: #ffffff;
             cursor: pointer;
         }
 
-        .answer button.selected {
-            background-color: #d0e4f5; /* 선택된 버튼의 배경색 */
-            border-color: #4a90e2;
-            color: #4a90e2;
+        .button:hover {
+            background-color: #4ac1b0;
+            transform: scale(1.05);
         }
 
-        .result {
-            margin-top: 20px;
-            font-size: 1.2em;
-            color: #4a90e2;
+        footer {
+            background-color: #4a90e2;
+            color: #fff;
+            text-align: center;
+            padding: 20px;
+            font-size: 0.9em;
         }
     </style>
 </head>
 <body>
+    <header class="header">
+        <h1>아름다운 웹 페이지</h1>
+    </header>
+
     <div class="container">
-        <h1>MBTI 테스트</h1>
-        <div class="question" onclick="toggleAnswer(this)">
-            질문 1: 당신은 바깥에 노는 것이 좋나요, 안 좋나요?
-        </div>
-        <div class="answer" id="answer1">
-            <button onclick="setAnswer('E', 1, this)">좋다</button>
-            <button onclick="setAnswer('I', 1, this)">싫다</button>
-        </div>
+        <section class="section">
+            <h2>소개</h2>
+            <p>이 웹 페이지는 미니멀하고 세련된 디자인을 통해 사용자에게 좋은 경험을 제공합니다. 간결한 레이아웃과 현대적인 색상 조합이 돋보이며, 직관적인 디자인을 통해 정보를 명확하게 전달합니다.</p>
+        </section>
 
-        <div class="question" onclick="toggleAnswer(this)">
-            질문 2: 당신은 상상을 좋아하시나요?
-        </div>
-        <div class="answer" id="answer2">
-            <button onclick="setAnswer('N', 2, this)">좋다</button>
-            <button onclick="setAnswer('S', 2, this)">싫다</button>
-        </div>
+        <section class="section">
+            <h2>특징</h2>
+            <p>1. **모던한 디자인**: 최신 웹 디자인 트렌드를 반영하여 시각적으로 매력적인 레이아웃을 제공합니다.</p>
+            <p>2. **응답성**: 다양한 화면 크기에서 최적화된 레이아웃을 제공합니다.</p>
+            <p>3. **인터랙티브 요소**: 버튼 클릭 시 시각적인 피드백을 통해 사용자와의 상호작용을 향상시킵니다.</p>
+        </section>
 
-        <div class="question" onclick="toggleAnswer(this)">
-            질문 3: 다른 사람이 우는 것을 보고 울고 싶나요?
-        </div>
-        <div class="answer" id="answer3">
-            <button onclick="setAnswer('F', 3, this)">맞다</button>
-            <button onclick="setAnswer('T', 3, this)">싫다</button>
-        </div>
-
-        <div class="question" onclick="toggleAnswer(this)">
-            질문 4: 계획을 세우는 걸 좋아하나요?
-        </div>
-        <div class="answer" id="answer4">
-            <button onclick="setAnswer('J', 4, this)">좋다</button>
-            <button onclick="setAnswer('P', 4, this)">싫다</button>
-        </div>
-
-        <div id="result" class="result"></div>
+        <section class="section">
+            <h2>연락처</h2>
+            <p>궁금한 점이 있으면 아래 버튼을 클릭하여 문의해 주세요:</p>
+            <button class="button" onclick="sendEmail()">이메일 보내기</button>
+            <button class="button" onclick="changeBackground()">배경색 변경</button>
+        </section>
     </div>
 
+    <footer>
+        &copy; 2024 아름다운 웹 페이지. 모든 권리 보유.
+    </footer>
+
     <script>
-        const answers = {
-            1: null,
-            2: null,
-            3: null,
-            4: null
-        };
-
-        function toggleAnswer(element) {
-            const isActive = element.classList.contains('active');
-            
-            // 모든 질문에서 'active' 클래스 제거
-            document.querySelectorAll('.question').forEach(el => el.classList.remove('active'));
-            
-            // 모든 답변 숨기기
-            document.querySelectorAll('.answer').forEach(el => el.style.display = 'none');
-            
-            if (!isActive) {
-                element.classList.add('active');
-                element.nextElementSibling.style.display = 'block';
-            }
+        function sendEmail() {
+            // 이메일 보내기 클릭 시 알림
+            alert('이메일 클라이언트가 열릴 것입니다. (실제 동작을 위해 서버 측 코드 필요)');
         }
 
-        function setAnswer(answer, questionNumber, button) {
-            // 모든 버튼에서 'selected' 클래스 제거
-            document.querySelectorAll(`#answer${questionNumber} button`).forEach(btn => btn.classList.remove('selected'));
-            
-            // 선택한 버튼에 'selected' 클래스 추가
-            button.classList.add('selected');
-            
-            // 답변 기록
-            answers[questionNumber] = answer;
-            
-            // 결과 계산
-            if (Object.values(answers).every(value => value !== null)) {
-                let result = calculateMBTI();
-                document.getElementById('result').innerText = `당신의 MBTI 유형은 ${result}입니다.`;
-            }
-        }
+        function changeBackground() {
+            // 배경색 변경
+            const colors = ['#f7f9fc', '#e0f7fa', '#fff3e0', '#fce4ec'];
+            const currentColor = document.body.style.backgroundColor;
+            let newColor;
 
-        function calculateMBTI() {
-            let result = '';
-            // E-I
-            result += answers[1] === 'E' ? 'E' : 'I';
-            // N-S
-            result += answers[2] === 'N' ? 'N' : 'S';
-            // F-T
-            result += answers[3] === 'F' ? 'F' : 'T';
-            // J-P
-            result += answers[4] === 'J' ? 'J' : 'P';
+            do {
+                newColor = colors[Math.floor(Math.random() * colors.length)];
+            } while (newColor === currentColor);
 
-            return result;
+            document.body.style.backgroundColor = newColor;
         }
     </script>
 </body>
