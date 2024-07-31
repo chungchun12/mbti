@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MBTI 테스트</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f8ff; /* 파스텔 톤 배경색 */
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            background-color: #ffffff; /* 흰색 배경 */
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            width: 300px;
+            text-align: center;
+        }
+
+        h1 {
+            color: #4a90e2; /* 파스텔 톤의 블루 */
+            margin-bottom: 20px;
+        }
+
+        .question {
+            margin: 15px 0;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 10px;
+        }
+
+        .question:hover {
+            background-color: #e6f7ff; /* 호버 시 파스텔 블루 배경색 */
+            transform: scale(1.05); /* 호버 시 크기 증가 */
+        }
+
+        .question.active {
+            background-color: #d0e4f5; /* 선택 시 배경색 */
+        }
+
+        .answer {
+            display: none;
+            margin-top: 10px;
+        }
+
+        .question.active + .answer {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>MBTI 테스트</h1>
+        <div class="question" onclick="toggleAnswer(this)">
+            질문 1: 당신은 외향적인가요, 내향적인가요?
+        </div>
+        <div class="answer">
+            <p>여기에는 외향적과 내향적에 대한 설명이 들어갑니다.</p>
+        </div>
+
+        <div class="question" onclick="toggleAnswer(this)">
+            질문 2: 당신은 감각형인가요, 직관형인가요?
+        </div>
+        <div class="answer">
+            <p>여기에는 감각형과 직관형에 대한 설명이 들어갑니다.</p>
+        </div>
+
+        <div class="question" onclick="toggleAnswer(this)">
+            질문 3: 당신은 사고형인가요, 감정형인가요?
+        </div>
+        <div class="answer">
+            <p>여기에는 사고형과 감정형에 대한 설명이 들어갑니다.</p>
+        </div>
+
+        <div class="question" onclick="toggleAnswer(this)">
+            질문 4: 당신은 판단형인가요, 인식형인가요?
+        </div>
+        <div class="answer">
+            <p>여기에는 판단형과 인식형에 대한 설명이 들어갑니다.</p>
+        </div>
+    </div>
+
+    <script>
+        function toggleAnswer(element) {
+            const isActive = element.classList.contains('active');
+            
+            // 모든 질문에서 'active' 클래스 제거
+            document.querySelectorAll('.question').forEach(el => el.classList.remove('active'));
+            
+            // 모든 답변 숨기기
+            document.querySelectorAll('.answer').forEach(el => el.style.display = 'none');
+            
+            if (!isActive) {
+                element.classList.add('active');
+                element.nextElementSibling.style.display = 'block';
+            }
+        }
+    </script>
+</body>
+</html>
