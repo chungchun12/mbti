@@ -53,8 +53,19 @@
             margin-top: 10px;
         }
 
-        .question.active + .answer {
-            display: block;
+        .answer button {
+            margin: 5px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #ffffff;
+            cursor: pointer;
+        }
+
+        .answer button.selected {
+            background-color: #d0e4f5; /* 선택된 버튼의 배경색 */
+            border-color: #4a90e2;
+            color: #4a90e2;
         }
 
         .result {
@@ -70,48 +81,44 @@
         <div class="question" onclick="toggleAnswer(this)">
             질문 1: 당신은 바깥에 노는 것이 좋나요, 안 좋나요?
         </div>
-        <div class="answer">
-            <button onclick="setAnswer('E')">좋다</button>
-            <button onclick="setAnswer('I')">싫다</button>
+        <div class="answer" id="answer1">
+            <button onclick="setAnswer('E', 1)">좋다</button>
+            <button onclick="setAnswer('I', 1)">싫다</button>
         </div>
 
         <div class="question" onclick="toggleAnswer(this)">
             질문 2: 당신은 상상을 좋아하시나요?
         </div>
-        <div class="answer">
-            <button onclick="setAnswer('N')">좋다</button>
-            <button onclick="setAnswer('S')">싫다</button>
+        <div class="answer" id="answer2">
+            <button onclick="setAnswer('N', 2)">좋다</button>
+            <button onclick="setAnswer('S', 2)">싫다</button>
         </div>
 
         <div class="question" onclick="toggleAnswer(this)">
             질문 3: 다른 사람이 우는 것을 보고 울고 싶나요?
         </div>
-        <div class="answer">
-            <button onclick="setAnswer('F')">맞다</button>
-            <button onclick="setAnswer('T')">싫다</button>
+        <div class="answer" id="answer3">
+            <button onclick="setAnswer('F', 3)">맞다</button>
+            <button onclick="setAnswer('T', 3)">싫다</button>
         </div>
 
         <div class="question" onclick="toggleAnswer(this)">
             질문 4: 계획을 세우는 걸 좋아하나요?
         </div>
-        <div class="answer">
-            <button onclick="setAnswer('J')">좋다</button>
-            <button onclick="setAnswer('P')">싫다</button>
+        <div class="answer" id="answer4">
+            <button onclick="setAnswer('J', 4)">좋다</button>
+            <button onclick="setAnswer('P', 4)">싫다</button>
         </div>
 
         <div id="result" class="result"></div>
     </div>
 
     <script>
-        let answers = {
-            E: 0,
-            I: 0,
-            N: 0,
-            S: 0,
-            F: 0,
-            T: 0,
-            J: 0,
-            P: 0
+        const answers = {
+            1: null,
+            2: null,
+            3: null,
+            4: null
         };
 
         function toggleAnswer(element) {
@@ -129,28 +136,34 @@
             }
         }
 
-        function setAnswer(answer) {
-            // 각 항목의 점수를 0으로 초기화
-            document.querySelectorAll('.question').forEach(el => el.classList.remove('active'));
-            document.querySelectorAll('.answer').forEach(el => el.style.display = 'none');
+        function setAnswer(answer, questionNumber) {
+            // 모든 버튼에서 'selected' 클래스 제거
+            document.querySelectorAll(`#answer${questionNumber} button`).forEach(button => button.classList.remove('selected'));
+            
+            // 선택한 버튼에 'selected' 클래스 추가
+            const selectedButton = [...document.querySelectorAll(`#answer${questionNumber} button`)].find(button => button.innerText === (answer === 'E' ? '좋다' : '싫다'));
+            selectedButton.classList.add('selected');
             
             // 답변 기록
-            answers[answer]++;
+            answers[questionNumber] = answer;
             
             // 결과 계산
-            let result = calculateMBTI();
-            document.getElementById('result').innerText = `당신의 MBTI 유형은 ${result}입니다.`;
+            if (Object.values(answers).every(value => value !== null)) {
+                let result = calculateMBTI();
+                document.getElementById('result').innerText = `당신의 MBTI 유형은 ${result}입니다.`;
+            }
         }
 
         function calculateMBTI() {
-            let types = ['E', 'I', 'N', 'S', 'F', 'T', 'J', 'P'];
             let result = '';
-
-            types.forEach(type => {
-                if (answers[type] > 0) {
-                    result += type;
-                }
-            });
+            // E-I
+            result += answers[1] === 'E' ? 'E' : 'I';
+            // N-S
+            result += answers[2] === 'N' ? 'N' : 'S';
+            // F-T
+            result += answers[3] === 'F' ? 'F' : 'T';
+            // J-P
+            result += answers[4] === 'J' ? 'J' : 'P';
 
             return result;
         }
